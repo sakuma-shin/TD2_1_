@@ -1,4 +1,7 @@
 #include <Novice.h>
+#include"Easing.h"
+#include"ExMath.h"
+#include"Hit.h"
 
 const char kWindowTitle[] = "LC1C_14_サクマ_シン_タイトル";
 
