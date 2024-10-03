@@ -1,4 +1,5 @@
 #include <Novice.h>
+#include "Player.h"
 
 const char kWindowTitle[] = "LC1C_14_サクマ_シン_タイトル";
 
@@ -9,8 +10,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Novice::Initialize(kWindowTitle, 1280, 720);
 
 	// キー入力結果を受け取る箱
-	char keys[256] = {0};
-	char preKeys[256] = {0};
+	char keys[256] = { 0 };
+	char preKeys[256] = { 0 };
+
+	Player* player = new Player();
 
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
@@ -25,6 +28,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		/// ↓更新処理ここから
 		///
 
+		player->Update(keys, preKeys);
+
 		///
 		/// ↑更新処理ここまで
 		///
@@ -32,6 +37,30 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		///
 		/// ↓描画処理ここから
 		///
+
+		player->Draw();
+
+		Novice::DrawBox(0, 700, 12 * player->GetTime(), 20, 0.0f, WHITE, kFillModeSolid);
+		if (player->GetTime() > 20) {
+			Novice::DrawBox(0, 700, 12 * player->GetTime(), 20, 0.0f, BLUE, kFillModeSolid);
+		}
+
+		if (player->GetTime() > 40) {
+			Novice::DrawBox(0, 700, 12 * player->GetTime(), 20, 0.0f, GREEN, kFillModeSolid);
+		}
+		
+		if (player->GetTime() > 60) {
+			Novice::DrawBox(0, 700, 12 * player->GetTime(), 20, 0.0f, RED, kFillModeSolid);
+		}
+		
+		if (player->GetTime() > 80) {
+			Novice::DrawBox(0, 700, 12 * player->GetTime(), 20, 0.0f, BLACK, kFillModeSolid);
+		}
+
+
+
+
+		Novice::ScreenPrintf(0, 0, "%d", int(player->GetTime()));
 
 		///
 		/// ↑描画処理ここまで
