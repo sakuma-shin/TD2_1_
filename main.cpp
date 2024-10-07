@@ -6,6 +6,8 @@ const char kWindowTitle[] = "LC1C_14_サクマ_シン_タイトル";
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
+	UINT color = 0;
+
 	// ライブラリの初期化
 	Novice::Initialize(kWindowTitle, 1280, 720);
 
@@ -40,24 +42,22 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		player->Draw();
 
-		Novice::DrawBox(0, 700, 12 * player->GetTime(), 20, 0.0f, WHITE, kFillModeSolid);
-		if (player->GetTime() > 20) {
-			Novice::DrawBox(0, 700, 12 * player->GetTime(), 20, 0.0f, BLUE, kFillModeSolid);
+		if (player->GetTime() <= 100) {
+			color = BLACK;
 		}
-
-		if (player->GetTime() > 40) {
-			Novice::DrawBox(0, 700, 12 * player->GetTime(), 20, 0.0f, GREEN, kFillModeSolid);
+		if (player->GetTime() <= 80) {
+			color = RED;
 		}
-		
-		if (player->GetTime() > 60) {
-			Novice::DrawBox(0, 700, 12 * player->GetTime(), 20, 0.0f, RED, kFillModeSolid);
+		if (player->GetTime() <= 60) {
+			color = GREEN;
 		}
-		
-		if (player->GetTime() > 80) {
-			Novice::DrawBox(0, 700, 12 * player->GetTime(), 20, 0.0f, BLACK, kFillModeSolid);
+		if (player->GetTime() <= 40) {
+			color = BLUE;
 		}
-
-
+		if (player->GetTime() <= 20) {
+			color = WHITE;
+		}
+		Novice::DrawBox(0, 700, 12 * player->GetTime(), 20, 0.0f, color, kFillModeSolid);
 
 
 		Novice::ScreenPrintf(0, 0, "%d", int(player->GetTime()));

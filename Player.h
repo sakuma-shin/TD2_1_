@@ -20,8 +20,6 @@ public:
 
 private:
 
-	float minJumpPower_ = 30;
-
 	float startJumpPower_ = 0;
 
 	float playerJumpPower_ = 0;
@@ -30,7 +28,7 @@ private:
 
 	uint32_t pushTime_ = 0;
 
-	uint32_t maxPushTime_ = 100;;
+	const uint32_t maxPushTime_ = 100;;
 
 	float moveSpeed_ = 7.5f;
 
