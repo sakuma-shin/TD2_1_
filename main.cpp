@@ -42,6 +42,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		player->Draw();
 
+#ifdef _DEBUG
 		if (player->GetTime() <= 100) {
 			color = BLACK;
 		}
@@ -58,7 +59,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			color = WHITE;
 		}
 		Novice::DrawBox(0, 700, 12 * player->GetTime(), 20, 0.0f, color, kFillModeSolid);
-
+#endif
 
 		Novice::ScreenPrintf(0, 0, "%d", int(player->GetTime()));
 
