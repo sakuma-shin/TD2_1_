@@ -33,7 +33,7 @@ private:
 
 	int whiteGH = 0;
 
-	Vector2 pos_;
+	Vector2 pos_ = {};
 	float width_=0.0f;
 	float height_=0.0f;
 
