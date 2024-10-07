@@ -100,6 +100,7 @@ void ChangeScene() {
 			titleScene = nullptr;
 			gameScene = new GamePlayScene();
 			gameScene->Initialize();
+
 		}
 		break;
 
