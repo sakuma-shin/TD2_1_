@@ -36,6 +36,14 @@ private:
 
 	Corners playerCorner_;
 
+	uint32_t downPower_ = 3;
+
+	bool isHold_ = false;
+
 	bool isJump_ = false;
+
+	bool oneMoreJump_ = false;
+
+	bool isGround_ = true;
 };
 
