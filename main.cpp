@@ -2,8 +2,34 @@
 #include"Easing.h"
 #include"ExMath.h"
 #include"Hit.h"
+#include"Wall.h"
+#include"GamePlayScene.h"
+#include"TitleScene.h"
+
+enum Scene {
+
+	kUnknown,
+	kTitle,
+	kPlay
+};
+
+Scene scene = kUnknown;
+
+GamePlayScene* gameScene = nullptr;
+TitleScene* titleScene = nullptr;
+
+void ChangeScene();
+void UpdateScene();
+void DrawScene();
+
+// キー入力結果を受け取る箱
+char keys[256] = { 0 };
+char preKeys[256] = { 0 };
+
 
 const char kWindowTitle[] = "LC1C_14_サクマ_シン_タイトル";
+
+
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
@@ -11,14 +37,22 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	// ライブラリの初期化
 	Novice::Initialize(kWindowTitle, 1280, 720);
 
-	// キー入力結果を受け取る箱
-	char keys[256] = {0};
-	char preKeys[256] = {0};
+	scene = kTitle;
+
+	gameScene = new GamePlayScene();
+	gameScene->Initialize();
+
+	titleScene = new TitleScene();
+	titleScene->Initialize();
+
 
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
 		// フレームの開始
 		Novice::BeginFrame();
+
+	
+
 
 		// キー入力を受け取る
 		memcpy(preKeys, keys, 256);
@@ -27,7 +61,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		///
 		/// ↓更新処理ここから
 		///
-
+		ChangeScene();
+		UpdateScene();
 		///
 		/// ↑更新処理ここまで
 		///
@@ -36,6 +71,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		/// ↓描画処理ここから
 		///
 
+		DrawScene();
 		///
 		/// ↑描画処理ここまで
 		///
@@ -53,3 +89,60 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Novice::Finalize();
 	return 0;
 }
+
+void ChangeScene() {
+	switch (scene) {
+	case kTitle:
+		if (titleScene->IsFinished()) {
+
+			
+			scene = Scene::kPlay;
+
+			delete titleScene;
+			titleScene = nullptr;
+
+			gameScene = new GamePlayScene();
+			gameScene->Initialize();
+
+		}
+		break;
+
+	case kPlay:
+		if (gameScene->IsFinished()) {
+			scene = Scene::kTitle;
+
+			delete gameScene;
+			gameScene = nullptr;
+
+			titleScene = new TitleScene();
+			titleScene->Initialize();
+
+		}
+		break;
+	}
+}
+
+void UpdateScene() {
+	switch (scene) {
+	case kTitle:
+		titleScene->Update(keys,preKeys);
+		break;
+
+	case kPlay:
+		gameScene->Update(keys, preKeys);
+		break;
+	}
+}
+
+void DrawScene() {
+	switch (scene) {
+	case kTitle:
+		titleScene->Draw();
+		break;
+
+	case kPlay:
+		gameScene->Draw();
+		break;
+	}
+}
+

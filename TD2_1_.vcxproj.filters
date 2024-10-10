@@ -47,6 +47,15 @@
     <ClCompile Include="ExMath.cpp">
       <Filter>KamataEngine</Filter>
     </ClCompile>
+    <ClCompile Include="GamePlayScene.cpp">
+      <Filter>KamataEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>KamataEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Wall.cpp">
+      <Filter>KamataEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -123,5 +132,8 @@
     <ClInclude Include="Hit.h" />
     <ClInclude Include="Easing.h" />
     <ClInclude Include="ExMath.h" />
+    <ClInclude Include="GamePlayScene.h" />
+    <ClInclude Include="TitleScene.h" />
+    <ClInclude Include="Wall.h" />
   </ItemGroup>
 </Project>
