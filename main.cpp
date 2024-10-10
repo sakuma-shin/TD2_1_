@@ -26,6 +26,7 @@ void DrawScene();
 char keys[256] = { 0 };
 char preKeys[256] = { 0 };
 
+
 const char kWindowTitle[] = "LC1C_14_サクマ_シン_タイトル";
 
 
@@ -36,9 +37,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	// ライブラリの初期化
 	Novice::Initialize(kWindowTitle, 1280, 720);
 
-	
-
 	scene = kTitle;
+
 	gameScene = new GamePlayScene();
 	gameScene->Initialize();
 
@@ -50,6 +50,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	while (Novice::ProcessMessage() == 0) {
 		// フレームの開始
 		Novice::BeginFrame();
+
+	
+
 
 		// キー入力を受け取る
 		memcpy(preKeys, keys, 256);
@@ -92,12 +95,12 @@ void ChangeScene() {
 	case kTitle:
 		if (titleScene->IsFinished()) {
 
-			gameScene = new GamePlayScene();
-			gameScene->Initialize();
+			
 			scene = Scene::kPlay;
 
 			delete titleScene;
 			titleScene = nullptr;
+
 			gameScene = new GamePlayScene();
 			gameScene->Initialize();
 
@@ -107,9 +110,6 @@ void ChangeScene() {
 	case kPlay:
 		if (gameScene->IsFinished()) {
 			scene = Scene::kTitle;
-
-			titleScene = new TitleScene();
-			titleScene->Initialize();
 
 			delete gameScene;
 			gameScene = nullptr;
